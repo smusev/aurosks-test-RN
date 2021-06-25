@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Creator from './components/Creator';
@@ -10,12 +10,15 @@ const App = () => {
     const dispatch = useDispatch();
     const Tab = createMaterialTopTabNavigator();
     dispatch(getData())
+    
+    const evCount = useSelector((state) => state.assessments.evaluatorData.length)
+    const crCount = useSelector((state) => state.assessments.creatorData.length)
 
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="Evaluator" component={Evaluator} />
-                <Tab.Screen name="Creator" component={Creator} />
+                <Tab.Screen name="Evaluator" component={Evaluator} options={{ title: `Evaluator (${evCount})` }} />
+                <Tab.Screen name="Creator" component={Creator} options={{title: `Creator (${crCount})`}} />
             </Tab.Navigator>
         </NavigationContainer>
       );
