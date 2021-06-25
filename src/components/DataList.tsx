@@ -1,27 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { assessmentType } from '../store/actions/assessments';
 import DataItem from './DataItem';
 
 const DataList = (props) => {
     
-    const List = props.assessments.map((item, key)=>{
-        return (
-            <DataItem key={key} item={item}/>
-        )
-    })
-
     const collapse = (e) => {
     }
 
-    const result = Object.values(props.assessments.reduce((acc, x) => {
+    const result = Object.values(props.assessments.reduce((acc:Object, x:assessmentType) => {
         acc[x.project.name] = [...(acc[x.project.name] || []), x ];
         return acc;
       }, {}));
       
      
     const groupedList = result.map(item => {
-        let hideFlag = false
-        const groupList = item.map( i  => {
+        const groupList = item.map( i:assessmentType  => {
             return (
                 <DataItem key={Math.random()} item={i}/>
             )

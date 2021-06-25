@@ -5,14 +5,15 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import Creator from './components/Creator';
 import Evaluator from './components/Evaluator'
 import { getData } from './store/actions/actions'
+import { ApplicationState } from './store/reducers';
 
 const App = () => {
     const dispatch = useDispatch();
     const Tab = createMaterialTopTabNavigator();
     dispatch(getData())
     
-    const evCount = useSelector((state) => state.assessments.evaluatorData.length)
-    const crCount = useSelector((state) => state.assessments.creatorData.length)
+    const evCount = useSelector((state: ApplicationState) => state.assessments.evaluatorData.length)
+    const crCount = useSelector((state: ApplicationState) => state.assessments.creatorData.length)
 
     return (
         <NavigationContainer>
